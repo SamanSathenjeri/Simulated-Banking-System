@@ -1,6 +1,6 @@
 # 💸 Simulated Digital Banking System for Secure Transactions
 
-## **Created for Charles Schwab Interview (NOT AFFILIATED WITH CHARLES SCHWAB AT ALL - JUST A PROJECT TO SHOWCASE)**
+## **Created for Charles Schwab Interview (NOT AFFILIATED WITH CHARLES SCHWAB - JUST A PROJECT TO SHOWCASE)**
 
 A full-stack banking simulation platform where users can create accounts, perform secure transactions, and sign high-value envelopes (> $10,000) for verification.
 Built with Spring Boot, Angular, and MySQL, the project demonstrates JWT-based authentication, role-based access control, and a modern responsive UI — containerized using Docker.  
@@ -65,7 +65,7 @@ Prerequisites
 
 ## Usage
 
-### Build using Docker
+#### Build using Docker
 > docker compose up --build
 
 To Stop:
@@ -75,7 +75,9 @@ Go To: http://localhost:4200
 
 If you want to just test locally instead, just follow the following directions 👇
 
-### Set Up Backend
+---
+
+#### Set Up Backend
 
 1. Build backend
 > cd transaction_validator
@@ -91,11 +93,14 @@ spring.datasource.password=password
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-2. Start backend
+2. Start backend  
 > mvn spring-boot:run
+
 Now the app will begin to run on http://localhost:8080 or if you want to use Swagger, try http://localhost:8080/swagger-ui.html
 
-### Set Up Frontend
+---
+
+#### Set Up Frontend
 
 1. Build and Start Frontend
 ```sh
