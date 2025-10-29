@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background: #F8F8FF;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px 20px;
+}
+
+.auth-container {
+  width: 600px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  padding: 40px 50px;
+  color: #003153;
+  transition: all 0.3s ease;
+}
+
+.auth-container:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.auth-container h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.section-label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 8px;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid rgba(0, 49, 83, 0.25);
+  border-radius: 8px;
+  font-size: 15px;
+  color: #003153;
+  transition: all 0.2s ease;
+}
+
+.input-box input:focus {
+  border-color: #00A0DF;
+  box-shadow: 0 0 0 3px rgba(0, 160, 223, 0.15);
+  outline: none;
+}
+
+.auth-container button {
+  width: 100%;
+  height: 44px;
+  background: #00A0DF;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.auth-container button:hover {
+  background: #008EC6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 160, 223, 0.3);
+}
+
+.auth-container button.delete {
+  background: #E63946;
+}
+
+.auth-container button.delete:hover {
+  background: #C5303D;
+  box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+}
+
+.section {
+  margin-bottom: 35px;
+}
+
+@media (max-width: 700px) {
+  .auth-container {
+    width: 100%;
+    padding: 30px 20px;
+  }
+}

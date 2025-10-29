@@ -1,0 +1,233 @@
+{
+  "version": "6.0",
+  "nxVersion": "22.0.1",
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "frontend": [
+        {
+          "file": ".editorconfig",
+          "hash": "4165385352547808172"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "8735202651818384803"
+        },
+        {
+          "file": ".postcssrc.json",
+          "hash": "3238241118719959164"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "5331566439708925252"
+        },
+        {
+          "file": ".vscode/launch.json",
+          "hash": "17038929134016848735"
+        },
+        {
+          "file": ".vscode/tasks.json",
+          "hash": "5336636969995539451"
+        },
+        {
+          "file": "README.md",
+          "hash": "9667733861405875640"
+        },
+        {
+          "file": "angular.json",
+          "hash": "15739538817178878626"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "8693254140733735007"
+        },
+        {
+          "file": "package.json",
+          "hash": "13066777786249797337",
+          "deps": [
+            "npm:@angular/build",
+            "npm:@angular/cli",
+            "npm:@angular/compiler-cli",
+            "npm:@spartan-ng/cli",
+            "npm:@types/jasmine",
+            "npm:jasmine-core",
+            "npm:karma",
+            "npm:karma-chrome-launcher",
+            "npm:karma-coverage",
+            "npm:karma-jasmine",
+            "npm:karma-jasmine-html-reporter",
+            "npm:typescript",
+            "npm:@angular/common",
+            "npm:@angular/compiler",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser",
+            "npm:@angular/router",
+            "npm:@spartan-ng/brain",
+            "npm:@tailwindcss/postcss",
+            "npm:postcss",
+            "npm:rxjs",
+            "npm:tailwindcss",
+            "npm:tslib",
+            "npm:zone.js"
+          ]
+        },
+        {
+          "file": "public/favicon.ico",
+          "hash": "3988961587069885523"
+        },
+        {
+          "file": "public/logo.svg",
+          "hash": "14822378008583681799"
+        },
+        {
+          "file": "src/app/app.config.ts",
+          "hash": "16577217916543110499"
+        },
+        {
+          "file": "src/app/app.css",
+          "hash": "16378444988318680084"
+        },
+        {
+          "file": "src/app/app.html",
+          "hash": "11971404451163275688"
+        },
+        {
+          "file": "src/app/app.routes.ts",
+          "hash": "5416607077468863465"
+        },
+        {
+          "file": "src/app/app.spec.ts",
+          "hash": "16404954086334157469"
+        },
+        {
+          "file": "src/app/app.ts",
+          "hash": "14352081565515757378"
+        },
+        {
+          "file": "src/app/components/account/account.css",
+          "hash": "12317040486961575206"
+        },
+        {
+          "file": "src/app/components/account/account.html",
+          "hash": "9272179095530670037"
+        },
+        {
+          "file": "src/app/components/account/account.spec.ts",
+          "hash": "11039187510452659814"
+        },
+        {
+          "file": "src/app/components/account/account.ts",
+          "hash": "9048764779150273052"
+        },
+        {
+          "file": "src/app/components/header/header.css",
+          "hash": "14562774725992117400"
+        },
+        {
+          "file": "src/app/components/header/header.html",
+          "hash": "6186860969087611359"
+        },
+        {
+          "file": "src/app/components/header/header.spec.ts",
+          "hash": "14927641620935597779"
+        },
+        {
+          "file": "src/app/components/header/header.ts",
+          "hash": "1094588876095141887"
+        },
+        {
+          "file": "src/app/components/messages/messages.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/components/messages/messages.html",
+          "hash": "4366676494910774009"
+        },
+        {
+          "file": "src/app/components/messages/messages.spec.ts",
+          "hash": "2498534290728534472"
+        },
+        {
+          "file": "src/app/components/messages/messages.ts",
+          "hash": "855967722785036089"
+        },
+        {
+          "file": "src/app/components/settings/settings.css",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/app/components/settings/settings.html",
+          "hash": "13921286087434072544"
+        },
+        {
+          "file": "src/app/components/settings/settings.spec.ts",
+          "hash": "6141366386693897415"
+        },
+        {
+          "file": "src/app/components/settings/settings.ts",
+          "hash": "9741992703149856015"
+        },
+        {
+          "file": "src/app/components/sign-in/sign-in.css",
+          "hash": "5284986870874673386"
+        },
+        {
+          "file": "src/app/components/sign-in/sign-in.html",
+          "hash": "1086059383748433825"
+        },
+        {
+          "file": "src/app/components/sign-in/sign-in.spec.ts",
+          "hash": "8950592566518165637"
+        },
+        {
+          "file": "src/app/components/sign-in/sign-in.ts",
+          "hash": "936740470990729421"
+        },
+        {
+          "file": "src/app/components/sign-up/sign-up.css",
+          "hash": "17381152059826357175"
+        },
+        {
+          "file": "src/app/components/sign-up/sign-up.html",
+          "hash": "3243621882906597056"
+        },
+        {
+          "file": "src/app/components/sign-up/sign-up.spec.ts",
+          "hash": "3210399658404096180"
+        },
+        {
+          "file": "src/app/components/sign-up/sign-up.ts",
+          "hash": "17732908967222287761"
+        },
+        {
+          "file": "src/index.html",
+          "hash": "6684945852708409814"
+        },
+        {
+          "file": "src/main.ts",
+          "hash": "7917250170623877694"
+        },
+        {
+          "file": "src/styles.css",
+          "hash": "14051452546026791765"
+        },
+        {
+          "file": "tsconfig.app.json",
+          "hash": "8369321240499881643"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "16977045106029113580"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "647795770471502525"
+        }
+      ]
+    },
+    "nonProjectFiles": []
+  },
+  "externalNodesHash": "17915532598963712087"
+}

@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+.account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 10px;
+}
+
+.balance {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0071ce;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-primary {
+  background-color: #0071ce;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease-in-out;
+  transform: translateY(-10px);
+}
+
+.btn-primary:hover {
+  background-color: #005fa3;
+}
+
+.accounts-page {
+  font-family: 'Montserrat', sans-serif;
+  padding: 40px 60px;
+  background-color: #f7f9fc;
+  min-height: 100vh;
+}
+
+h1 {
+  color: #0071ce;
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-align: center;
+  font-size: 32px;
+}
+
+h2 {
+  color: #002855;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+h3 {
+  color: #003366;
+  margin-top: 30px;
+  font-weight: 600;
+}
+
+p {
+  font-size: 45px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.select-menu {
+  position: relative;
+  width: 250px;
+  margin: 20px 0 40px;
+}
+
+.select-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 2px solid #0071ce;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.select-btn:hover {
+  background-color: #0071ce;
+  color: white;
+}
+
+.options {
+  position: absolute;
+  width: 100%;
+  margin-top: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+  list-style: none;
+  padding: 0;
+  display: none;
+}
+
+.select-menu.active .options {
+  display: block;
+}
+
+.option {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.option:hover {
+  background-color: #0071ce;
+  color: white;
+}
+
+[hlmTableContainer] {
+  margin-top: 40px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #f1f5f9;
+  color: #003366;
+  font-weight: 600;
+}
+
+tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+tfoot td {
+  font-weight: 700;
+  background-color: #f1f5f9;
+}
+
+.text-right {
+  text-align: right;
+}
+
+caption {
+  text-align: right;
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .accounts-page {
+    padding: 20px;
+  }
+
+  table, th, td {
+    font-size: 14px;
+  }
+
+  .select-menu {
+    width: 100%;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #002855;
+  font-family: "Montserrat", sans-serif;
+}
+
+.modal form {
+  background: #f9fafc;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.modal form h3 {
+  margin-bottom: 10px;
+  color: #003366;
+}
+
+.modal form label {
+  font-weight: 600;
+  margin-top: 10px;
+  display: block;
+  color: #002855;
+}
+
+.modal form select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+
+.modal input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  background-color: #ddd;
+  color: #333;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease-in-out;
+  transform: translateY(-10px);
+}
+
+.btn-secondary:hover {
+  background-color: #ccc;
+}
+
+form:nth-of-type(2) .btn-primary {
+  display: block;
+  transform: translateY(-40px);
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+form:nth-of-type(3) .btn-primary {
+  background: #E63946;
+}
+
+form:nth-of-type(3) .btn-primary:hover {
+  background: #C5303D;
+  box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+}

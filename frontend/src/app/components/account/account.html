@@ -1,0 +1,120 @@
+<link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+<div class="accounts-page">
+  <div class="account-header">
+  <div>
+    <h2>Your Accounts</h2>
+    <p class="balance"> {{ balance }}</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" (click)="createNewAccount()">+ New Account</button>
+    <button class="btn-secondary" (click)="openAccountSettingsModal()">⚙️ Account Settings</button>
+
+    <div class="select-menu" [ngClass]="{'active': isOpen}">
+      <div class="select-btn" (click)="toggleMenu()">
+        <span class="sBtn-text">{{ selectedOptionText }}</span>
+        <i class="bx bx-chevron-down"></i>
+      </div>
+      <ul class="options">
+        <li class="option" *ngFor="let option of _accounts" (click)="selectOption(option)">
+          <span class="option-text">{{ option }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div hlmTableContainer>
+    <h2>Received Transactions</h2>
+    <table hlmTable>
+      <caption hlmCaption>
+        A list of your recent received invoices.
+      </caption>
+      <thead hlmTHead>
+        <tr hlmTr>
+          <th hlmTh class="w-[100px]">Transaction ID</th>
+          <th hlmTh class="text-right">Amount</th>
+          <th hlmTh>Timestamp</th>
+          <th hlmTh>Sender ID</th>
+          <th hlmTh>Status</th>
+        </tr>
+      </thead>
+      <tbody hlmTBody>
+        @for (transaction of receivedTransactions; track transaction.transactionID) {
+        <tr hlmTr>
+          <td hlmTd class="font-medium">{{ transaction.transactionID }}</td>
+          <td hlmTd class="text-right">{{ transaction.amount }}</td>
+          <td hlmTd>{{ transaction.timestamp }}</td>
+          <td hlmTd>{{ transaction.senderAccountId }}</td>
+          <td hlmTd>{{ transaction.status }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div hlmTableContainer>
+    <h2>Sent Transactions</h2>
+    <table hlmTable>
+      <caption hlmCaption>
+        A list of your recent sent invoices.
+      </caption>
+      <thead hlmTHead>
+        <tr hlmTr>
+          <th hlmTh class="w-[100px]">Transaction ID</th>
+          <th hlmTh class="text-right">Amount</th>
+          <th hlmTh>Timestamp</th>
+          <th hlmTh>Receiver ID</th>
+          <th hlmTh>Status</th>
+        </tr>
+      </thead>
+      <tbody hlmTBody>
+        @for (transaction of sentTransactions; track transaction.transactionID) {
+        <tr hlmTr>
+          <td hlmTd class="font-medium">{{ transaction.transactionID }}</td>
+          <td hlmTd class="text-right">{{ transaction.amount }}</td>
+          <td hlmTd>{{ transaction.timestamp }}</td>
+          <td hlmTd>{{ transaction.receiverAccountId }}</td>
+          <td hlmTd>{{ transaction.status }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal-backdrop" *ngIf="isAccountSettingsModalOpen">
+  <div class="modal">
+    <h1>Account Settings</h1>
+
+    <form (ngSubmit)="submitTransaction()">
+      <h2>New Transaction</h2>
+      <label>Recipient Account ID</label>
+      <input type="text" [(ngModel)]="receiverAccountId" name="receiverAccountId" required />
+
+      <label>Amount ($)</label>
+      <input type="number" [(ngModel)]="transactionAmount" name="transactionAmount" min="1" required />
+
+      <div class="modal-actions">
+        <button type="submit" class="btn-primary">Send</button>
+      </div>
+    </form>
+
+    <form (ngSubmit)="deposit()">
+      <h2>Deposit Funds</h2>
+      <label>Amount ($)</label>
+      <input type="number" [(ngModel)]="depositAmount" name="depositAmount" min="1" required />
+      <button type="submit" class="btn-primary">Deposit</button>
+    </form>
+
+    <form>
+      <div class="modal-actions">
+        <button type="button" class="btn-primary" (click)="deleteAccount()">Delete Account</button>
+      </div>
+    </form>
+
+    <div class="modal-actions">
+      <button type="button" class="btn-secondary" (click)="closeAccountSettingsModal()">Close</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<!-- <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+<div class="envelope-container">
+  <h2>Your Messages</h2>
+
+  <table class="envelope-table">
+    <caption hlmCaption>
+        A list of your messages.
+      </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Status</th>
+        <th>Signed At</th>
+        <th class="text-center">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let envelope of _envelopes">
+        <td>{{ envelope.envelopeId }}</td>
+        <td [ngClass]="{'status-pending': envelope.status === 'PENDING', 'status-completed': envelope.status === 'COMPLETED'}">
+          {{ envelope.status }}
+        </td>
+        <td>{{ envelope.signedAt || '—' }}</td>
+        <td class="text-center">
+          <button
+            class="btn-sign"
+            [disabled]="envelope.status === 'COMPLETED'"
+            (click)="signEnvelope(envelope.envelopeId)">
+            {{ envelope.status === 'COMPLETED' ? 'Signed' : 'Sign' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+
+<link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+<div class="envelope-container">
+  <h2>Your Messages</h2>
+
+  <table class="envelope-table">
+    <caption hlmCaption>
+        A list of your messages.
+      </caption>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Sign Status</th>
+        <th>Envelope</th>
+        <th>Envelope Status</th>
+        <th>Signed At</th>
+        <th class="text-center">Sign</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let signer of _envelopes">
+        <td>{{ signer.signerId }}</td>
+        <td [ngClass]="{'status-pending': signer.signedAt == null, 'status-completed': signer.signedAt != null}">
+          {{ signer.signedAt != null ? 'Signed' : 'Sign' }}
+        </td>
+        <td>{{ signer.envelopeId }}</td>
+        <td>{{ signer.envelopeStatus }}</td>
+        <td>{{ signer.signedAt || '—' }}</td>
+        <td class="text-center">
+          <button
+            class="btn-sign"
+            [disabled]="signer.signedAt != null"
+            (click)="signEnvelope(signer.signerId)">
+            {{ signer.signedAt != null ? 'Signed' : 'Sign' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
