@@ -3,11 +3,12 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../../services/user/user';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RegistrationUser } from '../../models/User';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, FormsModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive, FormsModule],
   templateUrl: './sign-up.html',
   styleUrl: './sign-up.css',
 })
@@ -24,10 +25,14 @@ export class SignUp {
           form.reset();
         },
         error: (error) => {
-          console.error('Registration failed', error);
+          console.log('Registration failed', error);
+          alert('Registration failed');
         }
       });
       this.router.navigate(['/signin']);
+    }
+    else{
+      alert('Invalid credentials.');
     }
   }
 }

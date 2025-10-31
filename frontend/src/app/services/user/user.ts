@@ -25,6 +25,10 @@ export class UserService {
     return this.http.post(`${this.baseUrl}/newuser`, body.toString(), { headers: headers });
   }
 
+  getName(): Observable<string>{
+    return this.http.get(`${this.baseUrl}/getname`, { responseType: 'text' });
+  }
+
   updatePassword(newPassword: string) {
     return this.http.patch(
       `${this.baseUrl}/updatepassword?password=${encodeURIComponent(newPassword)}`,

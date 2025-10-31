@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Envelope, Signer } from '../../models/Envelope';
 import { EnvelopeService } from '../../services/envelope/envelope';
 import { UserService } from '../../services/user/user';
+import { Header } from '../header/header';
 
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [CommonModule, HlmTableImports],
+  imports: [CommonModule, HlmTableImports, Header],
   templateUrl: './messages.html',
   styleUrl: './messages.css',
 })

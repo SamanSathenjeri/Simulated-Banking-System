@@ -1,28 +1,27 @@
 <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+<app-header></app-header>
 <div class="accounts-page">
   <div class="account-header">
-  <div>
-    <h2>Your Accounts</h2>
-    <p class="balance"> {{ balance }}</p>
-  </div>
-
-  <div class="actions">
-    <button class="btn-primary" (click)="createNewAccount()">+ New Account</button>
-    <button class="btn-secondary" (click)="openAccountSettingsModal()">⚙️ Account Settings</button>
-
-    <div class="select-menu" [ngClass]="{'active': isOpen}">
-      <div class="select-btn" (click)="toggleMenu()">
-        <span class="sBtn-text">{{ selectedOptionText }}</span>
-        <i class="bx bx-chevron-down"></i>
+    <div class="account-info-group">
+      <div class="select-menu" [ngClass]="{'active': isOpen}">
+        <div class="select-btn" (click)="toggleMenu()">
+          <span class="sBtn-text">{{ selectedOptionText }}</span>
+          <i class="bx bx-chevron-down"></i>
+        </div>
+        <ul class="options">
+          <li class="option" *ngFor="let option of _accounts" (click)="selectOption(option)">
+            <span class="option-text">{{ option }}</span>
+          </li>
+        </ul>
       </div>
-      <ul class="options">
-        <li class="option" *ngFor="let option of _accounts" (click)="selectOption(option)">
-          <span class="option-text">{{ option }}</span>
-        </li>
-      </ul>
+      <p class="balance"> {{ balance | currency }}</p>
+    </div>
+
+    <div class="actions">
+      <button class="btn-primary" (click)="createNewAccount()">+ New Account</button>
+      <button class="btn-thirdary" (click)="openAccountSettingsModal()">💵 Move Money</button>
     </div>
   </div>
-</div>
 
   <div hlmTableContainer>
     <h2>Received Transactions</h2>
@@ -41,12 +40,24 @@
       </thead>
       <tbody hlmTBody>
         @for (transaction of receivedTransactions; track transaction.transactionID) {
-        <tr hlmTr>
+        <tr
+          hlmTr
+          [ngClass]="{
+            'status-approved': transaction.status === 'APPROVED',
+            'status-flagged': transaction.status === 'FLAGGED'
+          }"
+        >
           <td hlmTd class="font-medium">{{ transaction.transactionID }}</td>
-          <td hlmTd class="text-right">{{ transaction.amount }}</td>
-          <td hlmTd>{{ transaction.timestamp }}</td>
+          <td hlmTd class="text-right">{{ transaction.amount | currency }}</td>
+          <td hlmTd>{{ transaction.timestamp | date: 'medium' }}</td>
           <td hlmTd>{{ transaction.senderAccountId }}</td>
-          <td hlmTd>{{ transaction.status }}</td>
+          <td
+            hlmTd
+            [ngClass]="{
+              'status-text-approved': transaction.status === 'APPROVED',
+              'status-text-flagged': transaction.status === 'FLAGGED'
+            }"
+          >{{ transaction.status }}</td>
         </tr>
         }
       </tbody>
@@ -70,51 +81,106 @@
       </thead>
       <tbody hlmTBody>
         @for (transaction of sentTransactions; track transaction.transactionID) {
-        <tr hlmTr>
+        <tr
+          hlmTr
+          [ngClass]="{
+            'status-approved': transaction.status === 'APPROVED',
+            'status-flagged': transaction.status === 'FLAGGED'
+          }"
+        >
           <td hlmTd class="font-medium">{{ transaction.transactionID }}</td>
-          <td hlmTd class="text-right">{{ transaction.amount }}</td>
-          <td hlmTd>{{ transaction.timestamp }}</td>
+          <td hlmTd class="text-right">{{ transaction.amount | currency }}</td>
+          <td hlmTd>{{ transaction.timestamp | date: 'medium' }}</td>
           <td hlmTd>{{ transaction.receiverAccountId }}</td>
-          <td hlmTd>{{ transaction.status }}</td>
+          <td
+            hlmTd
+            [ngClass]="{
+              'status-text-approved': transaction.status === 'APPROVED',
+              'status-text-flagged': transaction.status === 'FLAGGED'
+            }"
+          >{{ transaction.status }}</td>
         </tr>
         }
       </tbody>
     </table>
   </div>
-</div>
 
-<div class="modal-backdrop" *ngIf="isAccountSettingsModalOpen">
-  <div class="modal">
-    <h1>Account Settings</h1>
 
-    <form (ngSubmit)="submitTransaction()">
-      <h2>New Transaction</h2>
-      <label>Recipient Account ID</label>
-      <input type="text" [(ngModel)]="receiverAccountId" name="receiverAccountId" required />
+  <div class="modal-backdrop" *ngIf="isAccountSettingsModalOpen">
+    <div class="modal">
+      <h1>Account Settings</h1>
 
-      <label>Amount ($)</label>
-      <input type="number" [(ngModel)]="transactionAmount" name="transactionAmount" min="1" required />
+      <form #transactionForm="ngForm" (ngSubmit)="submitTransaction(transactionForm)">
+        <h2>New Transaction</h2>
+        <label>Recipient Account ID</label>
+        <input type="text" [(ngModel)]="receiverAccountId" name="receiverAccountId" required />
+
+        <label>Amount ($)</label>
+        <input
+          type="number"
+          [(ngModel)]="transactionAmount"
+          name="transactionAmount"
+          #amountInput="ngModel"
+          min="1"
+          max="1000000000000"
+          step="0.01"
+          required
+        />
+
+        <div *ngIf="amountInput.invalid && (amountInput.dirty || amountInput.touched)" class="error-message">
+
+          <div *ngIf="amountInput.errors?.['required']">
+            Transaction amount is required.
+          </div>
+
+          <div *ngIf="amountInput.errors?.['min']">
+            Amount must be a positive number (minimum $1.00).
+          </div>
+
+          <div *ngIf="amountInput.errors?.['max']">
+            Amount must be less than $1 trillion dollars.
+          </div>
+
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary" [disabled]="transactionForm.invalid">
+            Send
+          </button>
+        </div>
+      </form>
+
+      <form #depositForm="ngForm" (ngSubmit)="deposit(depositForm)">
+        <h2>Deposit Funds</h2>
+        <label>Amount ($)</label>
+        <input type="number" [(ngModel)]="depositAmount" name="depositAmount" #depositInput="ngModel" min="1" max="1000000000000" step="0.01" required />
+        <div *ngIf="depositInput.invalid && (depositInput.dirty || depositInput.touched)" class="error-message">
+
+          <div *ngIf="depositInput.errors?.['required']">
+            Transaction amount is required.
+          </div>
+
+          <div *ngIf="depositInput.errors?.['min']">
+            Amount must be a positive number (minimum $1.00).
+          </div>
+
+          <div *ngIf="depositInput.errors?.['max']">
+            Amount must be less than $1 trillion dollars.
+          </div>
+
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary" [disabled]="!depositInput.valid">Deposit</button>
+        </div>
+      </form>
+
+      <div class="modal-actions modal-actions--delete">
+        <button type="button" class="btn-danger" (click)="deleteAccount()">Delete Account</button>
+      </div>
 
       <div class="modal-actions">
-        <button type="submit" class="btn-primary">Send</button>
+        <button type="button" class="btn-secondary" (click)="closeAccountSettingsModal()">Close</button>
       </div>
-    </form>
-
-    <form (ngSubmit)="deposit()">
-      <h2>Deposit Funds</h2>
-      <label>Amount ($)</label>
-      <input type="number" [(ngModel)]="depositAmount" name="depositAmount" min="1" required />
-      <button type="submit" class="btn-primary">Deposit</button>
-    </form>
-
-    <form>
-      <div class="modal-actions">
-        <button type="button" class="btn-primary" (click)="deleteAccount()">Delete Account</button>
-      </div>
-    </form>
-
-    <div class="modal-actions">
-      <button type="button" class="btn-secondary" (click)="closeAccountSettingsModal()">Close</button>
     </div>
   </div>
 </div>

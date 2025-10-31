@@ -1,11 +1,18 @@
 <header>
-    <img class="logo" src="logo.svg" alt="logo" />
-    <nav>
-    <ul class="nav__links">
-        <li><a routerLink="/accounts" routerLinkActive="active">Dashboard</a></li>
-        <li><a routerLink="/messages" routerLinkActive="active">Messages</a></li>
-        <li><a routerLink="/settings" routerLinkActive="active">Profile</a></li>
-    </ul>
-    </nav>
-    <button (click)="logout()">Log Out</button>
+    <div class="header-left"> 
+        <img class="logo" src="logo.svg" alt="logo" />
+        <h2 class="greeting">Hello, <span class="user-name">{{ name }}</span></h2>
+    </div>
+    <div class="header-right">
+        <nav>
+        <ul class="nav__links">
+            <li><a routerLink="/accounts" routerLinkActive="active">Dashboard</a></li>
+            <li><a routerLink="/messages" routerLinkActive="active">Messages
+                <span class="notification-dot" *ngIf="hasUnsignedDocuments"></span>
+            </a></li>
+            <li><a routerLink="/settings" routerLinkActive="active">Profile</a></li>
+        </ul>
+        </nav>
+        <button (click)="logout()">Log Out</button>
+    </div>
 </header>

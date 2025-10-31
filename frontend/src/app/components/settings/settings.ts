@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserService } from '../../services/user/user';
+import { Header } from '../header/header';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, Header],
   templateUrl: './settings.html',
   styleUrl: './settings.css',
 })

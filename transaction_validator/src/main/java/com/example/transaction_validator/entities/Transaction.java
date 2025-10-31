@@ -14,7 +14,7 @@ import lombok.*;
 @Table(name = "transactions")
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transactionId;
 
     private Double amount;
@@ -41,4 +41,11 @@ public class Transaction {
     @Enumerated(EnumType.STRING)
     @Column(length = 30, nullable = false)
     private TransactionStatus status = TransactionStatus.INCOMPLETE; // e.g. "APPROVED" or "FLAGGED"
+
+    @PrePersist
+    public void generateEnvelopeId() {
+        if (this.transactionId == null) {
+            this.transactionId = (long)(Math.random() * 90000000L) + 10000000L;
+        }
+    }
 }

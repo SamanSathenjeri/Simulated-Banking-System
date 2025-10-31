@@ -1,38 +1,39 @@
+<app-header></app-header>
 <body>
   <div class="auth-container">
     <h1>Settings</h1>
 
-    <form #f="ngForm" (ngSubmit)="changeName(f)">
+    <form #nameForm="ngForm" (ngSubmit)="changeName(nameForm)">
       <div class="section">
         <div class="section-label">Change Username:</div>
         <div class="input-box">
           <input type="text" placeholder="New Name" required name="name" ngModel/>
         </div>
-        <button type="submit" [disabled]="f.invalid">Change Username</button>
+        <button type="submit" [disabled]="nameForm.invalid">Change Username</button>
       </div>
     </form>
 
-    <form #f="ngForm" (ngSubmit)="changeEmail(f)">
+    <form #emailForm="ngForm" (ngSubmit)="changeEmail(emailForm)">
       <div class="section">
         <div class="section-label">Change Email:</div>
         <div class="input-box">
           <input type="email" placeholder="New Email" required name="email" ngModel/>
         </div>
-        <button type="submit" [disabled]="f.invalid">Change Email</button>
+        <button type="submit" [disabled]="emailForm.invalid">Change Email</button>
       </div>
     </form>
 
-    <form #f="ngForm" (ngSubmit)="changePassword(f)">
+    <form #passwordForm="ngForm" (ngSubmit)="changePassword(passwordForm)">
       <div class="section">
         <div class="section-label">Change Password:</div>
         <div class="input-box">
           <input type="password" placeholder="New Password" required name="password" ngModel/>
         </div>
-        <button type="submit" [disabled]="f.invalid">Change Password</button>
+        <button type="submit" [disabled]="passwordForm.invalid">Change Password</button>
       </div>
     </form>
 
-    <form #f="ngForm" (ngSubmit)="deleteUser(f)">
+    <form #deleteForm="ngForm" (ngSubmit)="deleteUser(deleteForm)">
       <div class="section">
         <div class="section-label">Delete Account:</div>
         <button class="delete">Delete</button>

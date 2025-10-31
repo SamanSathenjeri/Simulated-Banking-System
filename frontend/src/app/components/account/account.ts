@@ -1,17 +1,18 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HlmTableImports } from '@spartan-ng/helm/table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { AccountService } from '../../services/account/account';
 import { UserService } from '../../services/user/user';
 import { AccountModel } from '../../models/AccountModel';
 import { Transaction } from '../../models/Envelope';
+import { Header } from '../header/header';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [CommonModule, HlmTableImports, FormsModule],
+  imports: [CommonModule, HlmTableImports, FormsModule, Header],
   templateUrl: './account.html',
   styleUrl: './account.css',
 })
@@ -21,12 +22,14 @@ export class Account implements OnInit {
 	_accounts: string[] = [];
 	selectedOptionText: string = 'Your Accounts';
 	selectedAccount: AccountModel | null = null;
-	balance: string | null = null;
+	balance: number | null = null;
     sentTransactions: Transaction[] = [];
     receivedTransactions: Transaction[] = [];
 	receiverAccountId: string | null = null;
-	depositAmount = 0;
+	depositAmount: number | null = null;
 	transactionAmount = 0;
+	@ViewChild('transactionForm') transactionForm!: NgForm;
+	@ViewChild('depositForm') depositForm!: NgForm;
 
 	constructor(private accountService: AccountService, private userService: UserService, private cdr: ChangeDetectorRef) { }
 
@@ -53,7 +56,7 @@ export class Account implements OnInit {
 		this.accountService.getAccount(+account).subscribe({
 			next: (data: AccountModel) => {
 				console.log('Received Account:', data.accountId);
-				this.balance = `Balance: $${data.balance}`;
+				this.balance = data.balance;
 				this.setSentTransactions(data.accountId);
 				this.setReceivedTransactions(data.accountId);
 				this.selectedAccount = data;
@@ -104,6 +107,12 @@ export class Account implements OnInit {
 	}
 
 	closeAccountSettingsModal() {
+		if (this.transactionForm) {
+			this.transactionForm.reset();
+		}
+		if (this.depositForm) {
+			this.depositForm.reset();
+		}
 		this.isAccountSettingsModalOpen = false;
 	}
 
@@ -122,13 +131,13 @@ export class Account implements OnInit {
 		}
 	}
 
-	deposit() {
-		if (this.selectedAccount != null){
+	deposit(form: NgForm) {
+		if (this.selectedAccount != null && this.depositAmount ){
 			this.accountService.addBalance(+this.selectedAccount?.accountId, this.depositAmount).subscribe({
 				next: () => {
 					this.closeAccountSettingsModal();
 					this.setAccountsPage(this.selectedOptionText);
-					this.depositAmount = 0;
+					// this.depositAmount = 0;
 				},
 				error: (err) => {
 					console.error('Error adding balance:', err);
@@ -137,12 +146,12 @@ export class Account implements OnInit {
 		}
 	}
 
-	submitTransaction() {
+	submitTransaction(form: NgForm) {
 		if (this.selectedAccount != null && this.receiverAccountId){
 			this.accountService.makeTransaction(+this.selectedAccount?.accountId, this.transactionAmount, this.receiverAccountId).subscribe({
 				next: () => {
 					this.setAccountsPage(this.selectedOptionText);
-					this.transactionAmount = 0;
+					// this.transactionAmount = 0;
 					this.closeAccountSettingsModal();
 				},
 				error: (err) => {

@@ -7,7 +7,7 @@
     background-color: #101636;
 }
 
-a, button {
+a, button, h2 {
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -17,7 +17,7 @@ a, button {
 
 header{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 30px 10%
 }
@@ -26,7 +26,7 @@ header{
     cursor: pointer;
     width: 80px;
     height: auto;
-    margin-right: auto;
+    margin-right: 20px;
 }
 
 .nav__links {
@@ -59,4 +59,45 @@ button {
 
 button:hover {
     background-color: rgba(0, 160, 223, 0.8);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+h2.greeting {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #edf0f1;
+    margin: 0;
+}
+
+.user-name {
+    color: #0088a9; 
+    font-weight: 700; 
+    font-style: italic; 
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+li a {
+  position: relative;
+  /* padding-right: 20px; */
+  display: block;
+}
+
+.notification-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ff4500;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  right: 85px;
+  box-shadow: 0 0 5px rgba(255, 69, 0, 0.7);
 }

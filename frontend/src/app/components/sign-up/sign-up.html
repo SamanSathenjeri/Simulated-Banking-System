@@ -1,16 +1,38 @@
 <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 <body>
   <div class="auth-container">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
       <h1>Register</h1>
       <div class="input-box">
         <input type="text" placeholder="Name" required name="name" ngModel/>
         <i class='bx  bx-user'  ></i>
       </div>
+
       <div class="input-box">
-        <input type="email" placeholder="Email" required name="email" ngModel/>
+        <input
+          type="email"
+          placeholder="Email"
+          required
+          name="email"
+          ngModel
+          #email="ngModel"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+        />
         <i class='bxr  bx-envelope-open'  ></i>
       </div>
+
+      <div *ngIf="email.invalid && email.touched" style="color: red; margin-top: -10px; margin-bottom: 10px; text-align: left; padding-left: 5px;">
+        <div *ngIf="email.errors?.['required']">
+          Email is required.
+        </div>
+        <div *ngIf="email.errors?.['email']">
+          Please enter a valid email address.
+        </div>
+        <div *ngIf="email.errors?.['pattern']"> 
+          Please enter a valid email address (e.g., user@domain.com).
+        </div>
+      </div>
+
       <div class="input-box">
         <input type="password" placeholder="Password" required name="password" ngModel/>
         <i class='bx  bx-lock'  ></i>

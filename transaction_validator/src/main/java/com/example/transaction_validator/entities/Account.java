@@ -10,7 +10,7 @@ import lombok.*;
 
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
 
     private Double balance;
@@ -18,4 +18,11 @@ public class Account {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
     private User user;
+
+    @PrePersist
+    public void generateAccountId() {
+        if (this.accountId == null) {
+            this.accountId = (long)(Math.random() * 90000000L) + 10000000L;
+        }
+    }
 }

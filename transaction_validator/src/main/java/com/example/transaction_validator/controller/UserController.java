@@ -50,11 +50,24 @@ public class UserController {
     public ResponseEntity<?> createNewUser(@RequestParam String name,
                                            @RequestParam String email,
                                            @RequestParam String password){
-        User user = new User();
-        user.setEmail(email);
-        user.setName(name);
-        user.setPassword(password);
-        return ResponseEntity.ok(userService.createUser(user));
+        try {
+            userService.getUser();
+            return ResponseEntity
+                .badRequest()
+                .body("User Exists");
+        } catch (Exception e) {
+            User user = new User();
+            user.setEmail(email);
+            user.setName(name);
+            user.setPassword(password);
+            return ResponseEntity.ok(userService.createUser(user));
+        }
+    }
+
+    @GetMapping("/getname")
+    public ResponseEntity<?> getName(){
+        User user = userService.getUser();
+        return ResponseEntity.ok(user.getName());
     }
 
     @PatchMapping("/updatename")
@@ -89,7 +102,7 @@ public class UserController {
     public ResponseEntity<?> updateUserPassword(@RequestParam String password){
         if (password != null){
             User user = userService.getUser();
-            String hashed_password = passwordEncoder.encode(user.getPassword());
+            String hashed_password = passwordEncoder.encode(password);
             user.setPassword(hashed_password);
             return ResponseEntity.ok(userService.updateUser(user));
         }
