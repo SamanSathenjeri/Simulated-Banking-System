@@ -1,6 +1,6 @@
 # 💸 Simulated Digital Banking System for Secure Transactions
 
-## **Created for Charles Schwab Interview (NOT AFFILIATED WITH CHARLES SCHWAB - JUST A PROJECT TO SHOWCASE)**
+## **Created for Charles Schwab Interview (NOT AFFILIATED WITH CHARLES SCHWAB (YET) - JUST A PROJECT TO SHOWCASE)**
 
 A full-stack banking simulation platform where users can create accounts, perform secure transactions, and sign high-value envelopes (> $10,000) for verification.
 Built with Spring Boot, Angular, and MySQL, the project demonstrates JWT-based authentication, role-based access control, and a modern responsive UI — containerized using Docker.  
@@ -56,7 +56,7 @@ Built with Spring Boot, Angular, and MySQL, the project demonstrates JWT-based a
 ## ⚙️ Installation & Setup
 
 Prerequisites
-- Java 17+
+- Java 21+
 - Node.js 18+
 - MySQL 8.0+
 - (optional) Docker Desktop
