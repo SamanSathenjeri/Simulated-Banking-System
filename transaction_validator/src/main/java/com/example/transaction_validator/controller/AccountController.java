@@ -62,7 +62,7 @@ public class AccountController {
 
     @DeleteMapping("/{id}/deleteaccount")
     public ResponseEntity<?> deleteAccount(@PathVariable Long id) { 
-        return ResponseEntity.ok(accountService.deleteAccount(id));
+        return ResponseEntity.ok(accountService.deactivateAccount(id));
     }
 
     @GetMapping("/{id}/senttransactions")

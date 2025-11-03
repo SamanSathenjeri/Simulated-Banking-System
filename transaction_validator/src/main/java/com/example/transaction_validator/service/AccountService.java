@@ -37,39 +37,46 @@ public class AccountService {
     public AccountDTO getAccountDTOById(Long accountId){
         Account account = accountRepository.findById(accountId)
             .orElseThrow(() -> new RuntimeException("Account not found with id: " + accountId));
+        if (!account.isActive()){
+            throw new RuntimeException("Account does not exist");
+        }
         return mapToDTO(account);
     }
 
     public Account getAccountById(Long accountId){
-        return accountRepository.findById(accountId)
+        Account account = accountRepository.findById(accountId)
             .orElseThrow(() -> new RuntimeException("Account not found with id: " + accountId));
+        if (!account.isActive()){
+            throw new RuntimeException("Account does not exist");
+        }
+        return account;
     }
 
     public Double getBalance(Long accountId){
         Account account = accountRepository.findById(accountId)
             .orElseThrow(() -> new RuntimeException("Account not found with id: " + accountId));
+        if (!account.isActive()){
+            throw new RuntimeException("Account does not exist");
+        }
         return account.getBalance();
     }
 
     public List<AccountDTO> getAllAccounts() {
-        return accountRepository.findAll().stream().map(this::mapToDTO).toList();
-    }
-
-    @Transactional
-    public boolean deleteAccount(Long accountId) {
-        accountRepository.delete(getAccountById(accountId));
-        return true;
+        return accountRepository.findAllActive().stream().map(this::mapToDTO).toList();
     }
 
     public List<AccountDTO> getAccountsByUser(){
         User user = userService.getUser();
-        List<Account> accounts = accountRepository.findByUser(user)
+        List<Account> accounts = accountRepository.findByUserAndActiveTrue(user)
             .orElseThrow(() -> new RuntimeException("No accounts found with User: " + user.getUserId()));
         return accounts.stream().map(this::mapToDTO).toList();
     }
 
     public List<TransactionDTO> getSentTransactionsByAccount(Long accountId){
         Account account = getAccountById(accountId);
+        if (!account.isActive()){
+            throw new RuntimeException("Account does not exist");
+        }
         List<Transaction> transactions = transactionRepository.findBySenderAccount(account)
             .orElseThrow(() -> new RuntimeException("No transactions found with Account: " + accountId));
         return transactions.stream().map(transaction -> new TransactionDTO(
@@ -85,6 +92,9 @@ public class AccountService {
 
     public List<TransactionDTO> getReceivedTransactionsByAccount(Long accountId){
         Account account = getAccountById(accountId);
+        if (!account.isActive()){
+            throw new RuntimeException("Account does not exist");
+        }
         List<Transaction> transactions = transactionRepository.findByReceiverAccount(account)
             .orElseThrow(() -> new RuntimeException("No transactions found with Account: " + accountId));
         return transactions.stream().map(transaction -> new TransactionDTO(
@@ -98,7 +108,19 @@ public class AccountService {
                     .toList();
     }
 
+    @Transactional
+    public boolean deactivateAccount(Long accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+        account.setActive(false);
+        accountRepository.save(account);
+        return true;
+    }
+
     public void addToBalance(Account account, Double amount ){
+        if (!account.isActive()){
+            throw new RuntimeException("Account does not exist");
+        }
         account.setBalance(account.getBalance()+amount);
         accountRepository.save(account);
     }

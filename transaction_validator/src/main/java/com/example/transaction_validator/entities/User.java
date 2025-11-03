@@ -32,6 +32,9 @@ public class User implements UserDetails{
 
     private UserRole userRole = UserRole.USER;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     @ToString.Exclude

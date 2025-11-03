@@ -129,7 +129,7 @@ public class UserController {
 
     @DeleteMapping("/deleteuser")
     public ResponseEntity<?> deleteUser(){
-        return ResponseEntity.ok(userService.deleteUser());
+        return ResponseEntity.ok(userService.deactivateUser());
     }
 
     @GetMapping("/getaccounts")

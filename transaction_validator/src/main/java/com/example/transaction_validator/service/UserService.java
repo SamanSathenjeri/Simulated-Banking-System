@@ -55,9 +55,17 @@ public class UserService {
     }
 
     @Transactional
-    public boolean deleteUser() {
+    public boolean deactivateUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        userRepository.delete(userRepository.findByEmail(email).get());
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setActive(false);
+        if (user.getAccounts() != null) {
+            user.getAccounts().forEach(a -> a.setActive(false));
+        }
+
+        userRepository.save(user);
         return true;
     }
 
@@ -67,6 +75,10 @@ public class UserService {
 
         if (!passwordEncoder.matches(user.getPassword(), storedUser.getPassword())){
             throw new IllegalStateException("Incorrect Password");
+        }
+
+        if (!storedUser.isActive()){
+            throw new RuntimeException("User does not exist");
         }
         return jwtUtil.generateToken(storedUser.getEmail());
     }

@@ -19,6 +19,9 @@ public class Account {
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
+    @Column(nullable = false)
+    private boolean active = true;
+
     @PrePersist
     public void generateAccountId() {
         if (this.accountId == null) {
