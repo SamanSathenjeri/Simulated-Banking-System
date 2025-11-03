@@ -6,10 +6,15 @@ A full-stack banking simulation platform where users can create accounts, perfor
 Built with Spring Boot, Angular, and MySQL, the project demonstrates JWT-based authentication, role-based access control, and a modern responsive UI — containerized using Docker.  
 
 ![Sign In Page](/images/signIn.png)
+---
 ![Accounts Dashboard Page](/images/accountsDashboard.png)
+---
 ![Accounts Settings Modal](/images/accountSettings.png)
+---
 ![Messages Page](/images/messages.png)
+---
 ![Settings Page](/images/settings.png)
+---
 
 ---
 
